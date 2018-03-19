@@ -94,17 +94,15 @@
         $month=$_GET["month"];
         $year=$_GET["year"];
         $date=$day."_".$month."_".$year;
-        echo $date;
-    }
+        }
         if(!empty($date)):
         $temp=file_get_contents(__dir__.'/ivent.txt');
-    echo $temp;
-        if($temp!==""){
+            if($temp!==""){
             $ivent=unserialize($temp);
         }else{$ivent=array();
              }
             if(isset($ivent[$date])): ?>
-            <form action="calendar.php" method="post">
+            <form method="POST">
                <?php 
                 echo $date."<br>";
                 echo $ivent[$date]; ?>
@@ -121,7 +119,8 @@
             }
         endif;
     if(!isset($ivent[$date])): ?>
-                <form action="calendar.php" method="post">
+                <form method="POST">
+                <?php echo $date."<br>"; ?>
                 <h1>Добавить заметку</h1>
                 <textarea cols="60" rows="20" name="note"></textarea>
                 <p><input type="submit" name="add" value="Сохранить"> 
